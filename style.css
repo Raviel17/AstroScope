@@ -1,0 +1,1191 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+#solar-system {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform-origin: center center;
+}
+
+.planet-container {
+    position: absolute;
+    transform-origin: center center;
+    z-index: 1;
+}
+
+.planet {
+    position: relative;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    background-size: cover;
+    background-position: center;
+    z-index: 2;
+}
+
+/* Matahari */
+.planet[data-name="Matahari"] {
+    background: radial-gradient(circle at 30% 30%, 
+        #FFF9C4 0%, 
+        #FDB813 30%, 
+        #FF8F00 60%, 
+        #FF6F00 100%);
+    box-shadow: 0 0 50px #FDB813,
+                0 0 100px rgba(253, 184, 19, 0.5),
+                0 0 150px rgba(253, 184, 19, 0.3);
+    animation: solarFlare 10s infinite linear;
+}
+
+/* Merkurius */
+.planet[data-name="Merkurius"] {
+    background: radial-gradient(circle at 30% 30%,
+        #A0522D 0%,
+        #8B4513 50%,
+        #654321 100%);
+    box-shadow: inset -4px -4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Venus */
+.planet[data-name="Venus"] {
+    background: radial-gradient(circle at 30% 30%,
+        #DEB887 0%,
+        #D2691E 50%,
+        #8B4513 100%);
+    box-shadow: inset -4px -4px 8px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(210, 105, 30, 0.3);
+}
+
+/* Bumi */
+.planet[data-name="Bumi"] {
+    background: radial-gradient(circle at 30% 30%,
+        #4B9CD3 0%,
+        #228B22 40%,
+        #4B9CD3 70%,
+        #1E4D2B 100%);
+    box-shadow: inset -4px -4px 8px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(75, 156, 211, 0.3);
+}
+
+/* Mars */
+.planet[data-name="Mars"] {
+    background: radial-gradient(circle at 30% 30%,
+        #CD5C5C 0%,
+        #8B0000 50%,
+        #800000 100%);
+    box-shadow: inset -4px -4px 8px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(205, 92, 92, 0.3);
+}
+
+/* Jupiter */
+.planet[data-name="Jupiter"] {
+    background: radial-gradient(circle at 30% 30%,
+        #DEB887 0%,
+        #CD853F 30%,
+        #8B4513 60%,
+        #654321 100%);
+    box-shadow: inset -4px -4px 8px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(222, 184, 135, 0.3);
+}
+
+/* Saturnus */
+.planet[data-name="Saturnus"] {
+    background: radial-gradient(circle at 30% 30%,
+        #F4A460 0%,
+        #DAA520 40%,
+        #CD853F 100%);
+    box-shadow: inset -4px -4px 8px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(244, 164, 96, 0.3);
+    z-index: 2;
+}
+
+/* Uranus */
+.planet[data-name="Uranus"] {
+    background: radial-gradient(circle at 30% 30%,
+        #87CEEB 0%,
+        #4682B4 50%,
+        #4169E1 100%);
+    box-shadow: inset -4px -4px 8px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(135, 206, 235, 0.3);
+}
+
+/* Neptunus */
+.planet[data-name="Neptunus"] {
+    background: radial-gradient(circle at 30% 30%,
+        #4169E1 0%,
+        #000080 50%,
+        #191970 100%);
+    box-shadow: inset -4px -4px 8px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(65, 105, 225, 0.3);
+}
+
+/* Efek hover yang lebih menarik */
+.planet:hover {
+    transform: scale(1.1) !important;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.5),
+                0 0 60px rgba(255, 255, 255, 0.3);
+}
+
+/* Animasi untuk Matahari */
+@keyframes solarFlare {
+    0%, 100% {
+        box-shadow: 0 0 50px #FDB813,
+                   0 0 100px rgba(253, 184, 19, 0.5),
+                   0 0 150px rgba(253, 184, 19, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 60px #FFA500,
+                   0 0 120px rgba(255, 165, 0, 0.6),
+                   0 0 180px rgba(255, 165, 0, 0.4);
+    }
+}
+
+#info-panel {
+    position: fixed;
+    bottom: 40px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 10px;
+    display: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    max-height: 80vh;
+    width: 460px;
+    overflow: hidden;
+}
+
+.info-header {
+    padding: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.95);
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.info-content {
+    padding: 25px 28px;
+    overflow-y: auto;
+    max-height: calc(80vh - 60px);
+    scrollbar-width: thin;
+    scrollbar-color: #FDB813 rgba(255, 255, 255, 0.1);
+    padding-bottom: 50px;
+}
+
+/* Styling untuk scrollbar */
+.info-content::-webkit-scrollbar {
+    width: 8px;
+    margin-right: 2px;
+}
+
+.info-content::-webkit-scrollbar-track {
+    margin: 5px 0 15px 0;
+}
+
+.info-content::-webkit-scrollbar-thumb {
+    background: #FDB813;
+    border-radius: 4px;
+}
+
+#controls {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    z-index: 1000;
+}
+
+#planet-name {
+    color: #FDB813;
+    margin-top: 0;
+}
+
+.zoom-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.3s;
+}
+
+.zoom-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.orbit {
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.control-group {
+    margin: 10px 0;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #FDB813;
+}
+
+input[type="range"] {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    height: 5px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.control-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.3s;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.close-btn {
+    background: #FDB813;
+    color: black;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s;
+}
+
+.close-btn:hover {
+    background: #FFD700;
+    transform: scale(1.1);
+}
+
+.orbit.hidden {
+    display: none;
+}
+
+/* Efek atmosfer */
+.atmosphere {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        transparent 70%
+    );
+    pointer-events: none;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+    filter: blur(5px);
+}
+
+/* Tambahkan background bintang */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(white 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: 0 0, 25px 25px;
+    opacity: 0.1;
+    animation: twinkling 20s infinite linear,
+              rotate 200s infinite linear;
+}
+
+@keyframes twinkling {
+    from {
+        opacity: 0.1;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    to {
+        opacity: 0.1;
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Tambahkan efek nebula di background */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at 50% 50%,
+        rgba(63, 94, 251, 0.1) 0%,
+        rgba(252, 70, 107, 0.1) 100%
+    );
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+/* Styling untuk cincin Saturnus */
+.saturn-rings {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 200%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.saturn-rings .ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transform: rotateX(75deg);
+    box-shadow: 
+        0 0 0 3px rgba(244, 164, 96, 0.3),
+        0 0 0 8px rgba(244, 164, 96, 0.2),
+        0 0 0 13px rgba(218, 165, 32, 0.3),
+        0 0 0 18px rgba(218, 165, 32, 0.2),
+        0 0 0 23px rgba(184, 134, 11, 0.3);
+    animation: rotateRing 50s linear infinite;
+}
+
+/* Animasi rotasi cincin */
+@keyframes rotateRing {
+    from {
+        transform: rotateX(75deg) rotateZ(0deg);
+    }
+    to {
+        transform: rotateX(75deg) rotateZ(360deg);
+    }
+}
+
+/* Styling untuk asteroid belt */
+.asteroid-belt {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.asteroid {
+    position: absolute;
+    background-color: rgba(169, 169, 169, 0.6);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Styling untuk satelit */
+.satellite-orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.satellite {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Efek glow untuk asteroid saat hover */
+.asteroid:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Styling untuk mode tampilan */
+.wireframe-mode .planet {
+    background: transparent !important;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: none;
+}
+
+.cartoon-mode .planet {
+    border: 3px solid rgba(0, 0, 0, 0.5);
+    box-shadow: inset -5px -5px 10px rgba(0, 0, 0, 0.7);
+}
+
+/* Styling untuk label planet */
+.planet-label {
+    position: absolute;
+    color: white;
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 2px 6px;
+    border-radius: 3px;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    white-space: nowrap;
+}
+
+/* Styling untuk trails canvas */
+#trails-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.5;
+}
+
+/* Styling untuk select dropdown */
+select {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 5px;
+}
+
+select:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Styling untuk detail panel */
+#planet-details {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+#planet-details p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+/* Efek hover yang lebih baik untuk kontrol */
+.control-btn, .zoom-btn {
+    backdrop-filter: blur(5px);
+}
+
+/* Styling untuk komet */
+.comet-container {
+    position: absolute;
+    transform-origin: center;
+    pointer-events: none;
+}
+
+.comet-body {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, white, #87CEEB);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.comet-tail {
+    position: absolute;
+    height: 4px;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.8),
+        rgba(135, 206, 235, 0.2),
+        transparent
+    );
+    transform-origin: left center;
+    transform: rotate(calc(var(--rotation) + 180deg));
+    filter: blur(1px);
+}
+
+/* Tambahkan animasi untuk mode kartun */
+.cartoon-mode .planet {
+    animation: wobble 5s infinite ease-in-out;
+}
+
+@keyframes wobble {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Efek glow yang lebih baik untuk Matahari */
+.planet:first-child {
+    animation: solarFlare 10s infinite linear;
+}
+
+@keyframes solarFlare {
+    0%, 100% {
+        box-shadow: 0 0 50px #FDB813,
+                   0 0 100px rgba(253, 184, 19, 0.5),
+                   0 0 150px rgba(253, 184, 19, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 60px #FFA500,
+                   0 0 120px rgba(255, 165, 0, 0.6),
+                   0 0 180px rgba(255, 165, 0, 0.4);
+    }
+}
+
+/* Tambahkan efek parallax untuk bintang */
+.star-layer-1, .star-layer-2, .star-layer-3 {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-size: 200px 200px;
+    pointer-events: none;
+}
+
+.star-layer-1 {
+    animation: parallax 150s infinite linear;
+    opacity: 0.3;
+}
+
+.star-layer-2 {
+    animation: parallax 100s infinite linear reverse;
+    opacity: 0.2;
+}
+
+.star-layer-3 {
+    animation: parallax 200s infinite linear;
+    opacity: 0.1;
+}
+
+@keyframes parallax {
+    from {
+        transform: translateZ(-100px) rotate(0deg);
+    }
+    to {
+        transform: translateZ(-100px) rotate(360deg);
+    }
+}
+
+/* Loading Screen Improvements */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #000000, #1a1a2e);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.5s ease-out;
+}
+
+.loading-content {
+    text-align: center;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.loading-header {
+    margin-bottom: 30px;
+}
+
+.loading-header i {
+    font-size: 48px;
+    color: #FDB813;
+    margin-bottom: 15px;
+}
+
+.loading-header h1 {
+    font-size: 36px;
+    color: #FDB813;
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 3px;
+}
+
+.loading-text h2 {
+    font-size: 24px;
+    color: white;
+    margin-bottom: 20px;
+    font-weight: 300;
+}
+
+.progress-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    margin: 30px 0;
+    position: relative;
+    overflow: visible;
+}
+
+.progress-planets {
+    position: absolute;
+    top: -8px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mini-planet {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: transform 0.3s ease;
+}
+
+.mini-planet.active {
+    transform: scale(1);
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #FDB813, #FF6B6B);
+    border-radius: 2px;
+    transition: width 0.3s ease-out;
+    position: relative;
+}
+
+.loading-status {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 15px 0;
+}
+
+.loading-fact {
+    margin-top: 30px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    font-size: 14px;
+    color: #FDB813;
+    border: 1px solid rgba(253, 184, 19, 0.2);
+}
+
+/* Glass Panel Effect */
+.glass-panel {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Navbar styling */
+#top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FDB813;
+}
+
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-btn span {
+    display: none;
+}
+
+#hamburger-btn {
+    display: none;
+}
+
+.speed-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px 15px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Mobile styling */
+@media screen and (max-width: 768px) {
+    #hamburger-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        color: #FDB813;
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    .nav-controls {
+        position: fixed;
+        top: 60px;
+        right: -100%;
+        width: auto;
+        background: rgba(0, 0, 0, 0.95);
+        padding: 15px;
+        border-radius: 0 0 0 10px;
+        transition: right 0.3s ease;
+        flex-direction: column;
+        gap: 10px;
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-controls.active {
+        right: 0;
+    }
+
+    .nav-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .speed-control {
+        width: 120px;
+    }
+
+    #simulation-date {
+        width: 120px;
+        text-align: center;
+    }
+}
+
+/* Untuk layar yang sangat kecil */
+@media screen and (max-width: 480px) {
+    .nav-controls {
+        grid-template-columns: repeat(3, auto);
+    }
+
+    .nav-btn {
+        padding: 6px;
+        height: 32px;
+        width: 32px;
+        font-size: 14px;
+    }
+
+    .speed-control {
+        grid-column: span 3;
+        height: 32px;
+        padding: 0 8px;
+    }
+
+    #simulation-date {
+        grid-column: span 3;
+        height: 32px;
+        font-size: 13px;
+    }
+
+    .speed-control input[type="range"] {
+        width: 60px;
+    }
+
+    .planet-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .comparison-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .education-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .education-btn {
+        width: 100%;
+    }
+
+    /* Penyesuaian ukuran planet untuk layar kecil */
+    .planet {
+        transform: scale(0.8);
+    }
+
+    .saturn-rings {
+        width: 150%;
+    }
+}
+
+/* Orientasi landscape pada mobile */
+@media screen and (max-height: 480px) and (orientation: landscape) {
+    #top-bar {
+        padding: 5px 10px;
+    }
+
+    .nav-controls {
+        grid-template-columns: repeat(6, auto);
+        gap: 5px;
+    }
+
+    .speed-control, #simulation-date {
+        grid-column: span 1;
+    }
+
+    #info-panel {
+        width: 50%;
+        height: 80vh;
+        left: 10px;
+        bottom: 10px;
+    }
+
+    .education-mode {
+        width: 40%;
+        right: 10px;
+        bottom: 10px;
+        left: auto;
+    }
+
+    /* Sesuaikan ukuran planet untuk landscape */
+    .planet-container {
+        transform: scale(0.7);
+    }
+}
+
+/* Tambahkan support untuk dark mode sistem */
+@media (prefers-color-scheme: dark) {
+    .nav-btn,
+    .speed-control,
+    #simulation-date {
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .education-mode,
+    #info-panel {
+        background: rgba(0, 0, 0, 0.95);
+    }
+}
+
+#grid-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    display: none;
+}
+
+/* Styling untuk event notification */
+.event-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #FDB813;
+    color: white;
+    z-index: 1000;
+    display: none;
+}
+
+.event-notification.show {
+    display: block;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Styling untuk perbandingan */
+.comparison-section {
+    margin: 20px 0;
+    padding: 15px 18px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+
+.comparison-item {
+    margin: 8px 0;
+}
+
+.earth-bar {
+    width: 55px;
+    height: 8px;
+    background: #4B9CD3;
+}
+
+.comparison-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 5px 0;
+}
+
+.comparison-value {
+    font-size: 12px;
+    color: #FDB813;
+}
+
+/* Styling untuk facts */
+.fun-facts {
+    margin-top: 20px;
+    margin: 20px 0;
+    padding: 15px 18px;
+}
+
+.facts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.fact-item {
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+.fact-item:last-child {
+    margin-bottom: 10px;
+}
+
+/* Styling untuk educational notes */
+.educational-notes {
+    margin: 20px 0;
+    padding: 15px 18px;
+    font-size: 13px;
+    line-height: 1.4;
+    background: rgba(253, 184, 19, 0.1);
+    border-radius: 8px;
+    border-left: 3px solid #FDB813;
+}
+
+.note-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.note-item i {
+    color: #FDB813;
+}
+
+/* Tambahkan padding khusus untuk elemen terakhir */
+.info-content > *:last-child {
+    margin-bottom: 35px;
+    padding-bottom: 15px;
+}
+
+/* Update styling untuk detail item */
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.detail-item i {
+    color: #FDB813;
+    min-width: 16px;
+    text-align: center;
+}
+
+.detail-item span {
+    display: inline-block;
+}
+
+.detail-item span:first-of-type {
+    margin-right: 8px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.detail-item span:last-child {
+    color: #FDB813;
+    margin-left: auto;
+}
+
+/* Update styling untuk orbit info container */
+.orbit-info {
+    margin: 15px 0;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.tooltip-trigger {
+    position: relative;
+    cursor: help;
+}
+
+.tooltip {
+    visibility: hidden;
+    position: absolute;
+    bottom: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    width: 250px;
+    text-align: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.9) transparent transparent transparent;
+}
+
+.tooltip-trigger:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Animasi transisi tanggal */
+.date-transition {
+    animation: dateFade 0.5s ease-in-out;
+}
+
+@keyframes dateFade {
+    0% { opacity: 0; transform: translateY(-10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Efek visual planet yang dipilih */
+.planet {
+    transition: all 0.3s ease-in-out;
+    position: relative;
+}
+
+.planet.selected {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5),
+                0 0 40px rgba(255, 255, 255, 0.3),
+                0 0 60px rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+    z-index: 100;
+}
+
+/* Efek hover untuk Saturnus */
+.planet[data-name="Saturnus"]:hover ~ .saturn-rings .ring {
+    box-shadow: 
+        0 0 0 3px rgba(244, 164, 96, 0.5),
+        0 0 0 8px rgba(244, 164, 96, 0.4),
+        0 0 0 13px rgba(218, 165, 32, 0.5),
+        0 0 0 18px rgba(218, 165, 32, 0.4),
+        0 0 0 23px rgba(184, 134, 11, 0.5);
+}
+
+/* Penyesuaian container Saturnus */
+.planet-container:has(.planet[data-name="Saturnus"]) {
+    z-index: 1;
+}
+
+/* Efek hover untuk orbit saat planet di-hover */
+.planet:hover ~ .orbit {
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Hapus semua style terkait education mode */
+.education-mode,
+.education-step,
+.education-controls,
+.education-btn {
+    display: none;
+}

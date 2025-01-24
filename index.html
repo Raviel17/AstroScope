@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroScope - Simulasi Tata Surya</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-header">
+                <i class="fas fa-globe fa-spin"></i>
+                <h1>AstroScope</h1>
+            </div>
+            <div class="loading-text">
+                <h2>Memuat Simulasi Tata Surya</h2>
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                    <div class="progress-planets">
+                        <div class="mini-planet" style="background: #FDB813;"></div>
+                        <div class="mini-planet" style="background: #A0522D;"></div>
+                        <div class="mini-planet" style="background: #DEB887;"></div>
+                        <div class="mini-planet" style="background: #4B9CD3;"></div>
+                    </div>
+                    <span class="progress-text">0%</span>
+                </div>
+                <div class="loading-status">Mempersiapkan perjalanan luar angkasa...</div>
+                <div class="loading-fact">
+                    Tahukah kamu? Cahaya dari Matahari membutuhkan waktu 8 menit untuk mencapai Bumi.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="solar-system">
+        <!-- Planet-planet akan ditambahkan melalui JavaScript -->
+    </div>
+
+    <div class="star-layer-1"></div>
+    <div class="star-layer-2"></div>
+    <div class="star-layer-3"></div>
+
+    <nav id="top-bar">
+        <div class="logo">
+            <i class="fas fa-globe"></i> AstroScope
+        </div>
+        <button id="hamburger-btn" class="nav-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="nav-controls">
+            <button class="nav-btn" id="toggle-orbits">
+                <i class="fas fa-circle-notch"></i>
+            </button>
+            <button class="nav-btn" id="zoom-in">
+                <i class="fas fa-search-plus"></i>
+            </button>
+            <button class="nav-btn" id="zoom-out">
+                <i class="fas fa-search-minus"></i>
+            </button>
+            <div class="speed-control">
+                <input type="range" id="speed" min="0" max="200" value="100">
+                <span class="speed-value">1x</span>
+            </div>
+            <button class="nav-btn" id="pause-btn">
+                <i class="fas fa-pause" id="pause-icon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div id="info-panel" class="glass-panel">
+        <div class="info-header">
+            <h2 id="planet-name"></h2>
+            <button class="close-btn" id="close-info">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="info-content">
+            <div class="basic-info">
+                <p id="planet-info"></p>
+                
+                <div class="planet-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-ruler-horizontal"></i>
+                        <span>Diameter:</span>
+                        <span id="planet-diameter"></span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-weight-hanging"></i>
+                        <span>Massa:</span>
+                        <span id="planet-mass"></span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-thermometer-half"></i>
+                        <span>Suhu Rata-rata:</span>
+                        <span id="planet-temp"></span>
+                    </div>
+                </div>
+
+                <div class="orbit-info">
+                    <div class="detail-item">
+                        <i class="fas fa-road"></i>
+                        <span>Jarak dari Matahari:</span>
+                        <span id="distance"></span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Periode Orbit:</span>
+                        <span id="orbit-period" class="tooltip-trigger">
+                            <span class="tooltip">
+                                Waktu yang dibutuhkan planet untuk menyelesaikan satu putaran penuh mengelilingi Matahari. 
+                                Satu tahun Bumi adalah satu periode orbit Bumi mengelilingi Matahari.
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="comparison-section">
+                <h3>Perbandingan dengan Bumi</h3>
+                <div class="comparison-stats">
+                    <div class="comparison-item">
+                        <div class="comparison-label">Ukuran</div>
+                        <div class="comparison-bar">
+                            <div class="earth-bar"></div>
+                            <div class="planet-bar" id="size-comparison"></div>
+                        </div>
+                        <div class="comparison-value" id="size-ratio"></div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-label">Jarak ke Matahari</div>
+                        <div class="comparison-bar">
+                            <div class="earth-bar"></div>
+                            <div class="planet-bar" id="distance-comparison"></div>
+                        </div>
+                        <div class="comparison-value" id="distance-ratio"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fun-facts">
+                <h3>Tahukah Kamu?</h3>
+                <div id="planet-facts" class="facts-list"></div>
+            </div>
+
+            <div class="educational-notes">
+                <div class="note-item">
+                    <i class="fas fa-lightbulb"></i>
+                    <span id="educational-note"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="labels-container"></div>
+    <canvas id="trails-canvas"></canvas>
+    <canvas id="grid-canvas"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>
