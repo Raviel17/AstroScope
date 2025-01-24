@@ -88,12 +88,6 @@ Untuk berkontribusi:
 - Data orbital dari NASA
 - Inspirasi desain dari berbagai simulasi tata surya
 
-## Kontribusi
-Kontribusi selalu diterima! Silakan fork repository ini dan buat pull request.
-
-## Author
-[Raviel](https://github.com/raviel17)
-
 ## 📞 Kontak
 - GitHub: [@raviel17](https://github.com/raviel17)
 - Email: raviel17@gmail.com
