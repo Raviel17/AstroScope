@@ -90,7 +90,6 @@ Untuk berkontribusi:
 
 ## 📞 Kontak
 - GitHub: [@raviel17](https://github.com/raviel17)
-- Email: raviel17@gmail.com
 
 ## 🐛 Pelaporan Bug
 Silakan buat issue baru di GitHub repository untuk melaporkan bug atau menyarankan fitur baru.
